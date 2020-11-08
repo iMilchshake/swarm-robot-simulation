@@ -8,6 +8,7 @@ public class ControllerScript : MonoBehaviour
     public static ControllerScript ctrlScript;
     public int fps;
     public float communicateRange;
+    public float visionRange;
 
     void Start()
     {
