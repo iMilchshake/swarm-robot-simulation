@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.PlayerLoop;
 
-public class RobotBehaviourTest : RobotBehaviour
+public class RobotBehaviourNet : RobotBehaviour
 {
     public List<Tuple<RobotScript, Vector3>> knownRobotPositions = new List<Tuple<RobotScript, Vector3>>();
 
-    public RobotBehaviourTest(RobotScript robot) : base(robot) { }
+    public RobotBehaviourNet(RobotScript robot) : base(robot) { }
 
     public override void DoStep()
     {
         knownRobotPositions.Clear();
-        robot.Broadcast<string>(new Message<string>("AnybodyHere?")); // Update Robot Positions
+        robot.Broadcast<string>(new Message<string>("AnybodyHere?", 0)); // Update Robot Positions
 
         float range = ControllerScript.ctrlScript.communicateRange;
         Vector3 closest_robot_pos = Vector3.negativeInfinity;
@@ -48,7 +48,7 @@ public class RobotBehaviourTest : RobotBehaviour
         {
             if("AnybodyHere?".Equals(m.GetData()))
             {
-                robot.Message<Vector3>(sender, new Message<Vector3>(robot.rb.position));
+                robot.Message<Vector3>(sender, new Message<Vector3>(robot.rb.position, 0));
             }
         }
         else if(m.GetData() is Vector3 vector)

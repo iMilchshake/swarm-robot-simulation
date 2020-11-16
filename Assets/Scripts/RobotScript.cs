@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class RobotScript : MonoBehaviour
@@ -6,6 +7,7 @@ public class RobotScript : MonoBehaviour
     public Rigidbody rb;
     public float speed;
     public RobotBehaviour behaviour;
+    public MonoScript test;
     public int id;
     public bool moving;
     private GameObject goal;
@@ -100,12 +102,13 @@ public class RobotScript : MonoBehaviour
 
     private void ShowDebug()
     {
-        foreach (RobotScript rs in findRobots())
-            Debug.DrawLine(rb.position, rs.rb.position);
+        foreach (var rs in findRobots())
+            Debug.DrawLine(rb.position, rs.rb.position, new Color(0.5f, 0.2f, 0.2f, 0.5f));
 
         tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.communicateRange, ControllerScript.ctrlScript.communicateRange, 32, new Color(0.5f, 0.2f, 0.2f, 0.5f));
         tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.visionRange, ControllerScript.ctrlScript.visionRange, 32, new Color(0.2f, 0.6f, 0.3f, 0.5f));
 
+        Debug.DrawLine(rb.position, new Vector3(targetLocation.x, rb.position.y, targetLocation.z), new Color(0.2f, 0.6f, 0.3f, 0.5f));
     }
 
 

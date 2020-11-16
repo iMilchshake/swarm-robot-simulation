@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,5 +17,7 @@ public class ControllerScript : MonoBehaviour
 
         //set target fps
         Application.targetFrameRate = fps;
+
+        Time.timeScale = 1;
     }
 }
