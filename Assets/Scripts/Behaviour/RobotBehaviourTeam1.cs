@@ -13,7 +13,7 @@ using Random = System.Random;
 public class RobotBehaviourTeam1 : RobotBehaviour
 {
     public List<Tuple<RobotScript, Vector3>> tmpRobotPositions = new List<Tuple<RobotScript, Vector3>>();
-    public List<RobotScript> tmpFoundRobots = new List<RobotScript>();
+    public List<RobotScript> clusterRobotList = new List<RobotScript>(); // Known Robots in Cluster
     public int state = 0;
     public RobotBehaviourTeam1(RobotScript robot) : base(robot) { }
 
@@ -33,7 +33,8 @@ public class RobotBehaviourTeam1 : RobotBehaviour
                 else if (!robot.moving) // reached targetLocation
                 {
                     // move to new location
-                    robot.SetTargetLocation(new Vector3(UnityEngine.Random.Range(-22, 22), 0, UnityEngine.Random.Range(-22, 22)));
+                    Vector2 pos = ControllerScript.RandomOuterPosition(5, 20);
+                    robot.SetTargetLocation(new Vector3(pos.x, 0, pos.y));
                 }
                 break;
 
