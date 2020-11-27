@@ -49,10 +49,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  speed: 0.05
+  speed: 0.1
+  test: {fileID: 11500000, guid: b4f8bfee16375924f808b104f6aecc7b, type: 3}
   id: 0
   moving: 0
+  goalPosition: {x: 0, y: 0, z: 0}
+  foundGoal: 0
   targetLocation: {x: 0, y: 0, z: 0}
+  defaultMaterial: {fileID: 2100000, guid: bf5cb57a0626b034885b9a4c7ad6cbc0, type: 2}
+  foundGoalMaterial: {fileID: 2100000, guid: ad4a4798cfee3444aa3b1ba5da653de1, type: 2}
+  mainBodyRenderer: {fileID: 7405301067326008136}
 --- !u!33 &2450203593373713360
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -204,5 +210,10 @@ PrefabInstance:
 --- !u!4 &6795387565306649196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7296093322432748031, guid: 61b2f41f5e73df645b558ec38408e86d, type: 3}
+  m_PrefabInstance: {fileID: 4255618819411772307}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7405301067326008136 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6758237079412943067, guid: 61b2f41f5e73df645b558ec38408e86d, type: 3}
   m_PrefabInstance: {fileID: 4255618819411772307}
   m_PrefabAsset: {fileID: 0}

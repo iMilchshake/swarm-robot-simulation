@@ -14,6 +14,9 @@ public class RobotScript : MonoBehaviour
     public Vector3 goalPosition;
     public bool foundGoal;
     public Vector3 targetLocation;
+    public Material defaultMaterial;
+    public Material foundGoalMaterial;
+    public MeshRenderer mainBodyRenderer;
 
     private static List<RobotScript> robots = new List<RobotScript>();
     public static int robot_count = 0;
@@ -39,6 +42,9 @@ public class RobotScript : MonoBehaviour
         goal = GameObject.Find("Goal");
         goalPosition = Vector3.negativeInfinity;
         foundGoal = false;
+        
+        //set default material
+        mainBodyRenderer.material = defaultMaterial;
     }
 
     void FixedUpdate()
@@ -66,9 +72,15 @@ public class RobotScript : MonoBehaviour
         //test if goal was found
         if (!foundGoal && Vector3.Distance(goal.transform.position, transform.position) < ControllerScript.ctrlScript.visionRange)
         {
-            goalPosition = goal.transform.position;
-            foundGoal = true;
+            GoalFound(goal.transform.position);
         } 
+    }
+
+    public void GoalFound(Vector3 pos)
+    {
+        goalPosition = pos;
+        foundGoal = true;
+        mainBodyRenderer.material = foundGoalMaterial;
     }
 
     public void SetTargetLocation(Vector3 pos)
