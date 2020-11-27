@@ -806,7 +806,8 @@ MonoBehaviour:
   fps: 9999999
   communicateRange: 7
   visionRange: 4
-  spawnObject: {fileID: 0}
+  spawnObject: {fileID: 249695894}
+  robotPrefab: {fileID: 2450203593373713367, guid: 0088105744d0bd2408481e1913af04fc, type: 3}
 --- !u!4 &1258836745
 Transform:
   m_ObjectHideFlags: 0

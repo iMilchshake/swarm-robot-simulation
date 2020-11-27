@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -123,5 +124,9 @@ public class RobotScript : MonoBehaviour
         Debug.DrawLine(rb.position, new Vector3(targetLocation.x, rb.position.y, targetLocation.z), new Color(0.2f, 0.6f, 0.3f, 0.5f));
     }
 
-
+    public void DestroyRobot()
+    {
+        robots.Remove(this);
+        Destroy(this.gameObject);
+    }
 }

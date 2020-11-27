@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using Random = System.Random;
 
@@ -14,6 +15,7 @@ public class ControllerScript : MonoBehaviour
     public float visionRange;
     public GameObject spawnObject;
     public GameObject robotPrefab;
+    private List<RobotScript> currentRobots = new List<RobotScript>();
     
     void Start()
     {
@@ -24,15 +26,70 @@ public class ControllerScript : MonoBehaviour
         Application.targetFrameRate = fps;
 
         //set timeScale
-        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
         
         //initialize random generator
         rnd = new Random();
         
-        //Spawn Robots
-        SpawnRobots(9, 3, 1.2f);
+        // Start Coroutine for Robots Benchmarking
+        StartCoroutine(BenchmarkRobot(1, 46, 5, 1, 1.2f, 3));
     }
+    
+    // TODO: Add variable RobotBehaviour
+    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize)
+    {
+        // initialize output-string
+        String output = "";
+        
+        // run simulation for each n in [nMin; nMax; step]
+        for (int n = nMin; n <= nMax; n += step)
+        {
+            // repeat simulation multiple times
+            for (int i = 0; i < repeats; i++)
+            {
+                // Spawn n robots
+                SpawnRobots(n, rowSize, gap);
 
+                // start timer
+                float t0 = Time.time;
+
+                // Wait for robots to finish
+                var allDone = false;
+                while (!allDone)
+                {
+                    allDone = true;
+                    foreach (var robo in currentRobots)
+                    {
+                        if (!robo.foundGoal)
+                        {
+                            allDone = false;
+                            break;
+                        }
+                    }
+                    
+                    //wait for next frame
+                    yield return null; 
+                }
+                
+                // end timer
+                float t = Time.time - t0;
+
+                // Clear Scene
+                while (currentRobots.Count > 0)
+                {
+                    RobotScript robo = currentRobots[0];
+                    currentRobots.RemoveAt(0);
+                    robo.DestroyRobot();
+                }
+
+                Debug.Log(n + " Robots finished in " + t + " sec");
+                output += n + ";" + t + "\n";
+            }
+        }
+
+        Debug.Log(output);
+    }
+    
     void SpawnRobots(int n, int rowSize, float gap)
     {
         var rows = Mathf.CeilToInt((float) n / (float)rowSize);
@@ -47,7 +104,9 @@ public class ControllerScript : MonoBehaviour
                 if(spawnedRobotCount++ < n)
                 {
                     Vector3 spawnPos = new Vector3(spawnPosition.x + (r * gap) - (rowLength/2), spawnPosition.y, spawnPosition.z - (i * gap));
-                    GameObject.Instantiate(robotPrefab, spawnPos, Quaternion.identity);
+                    GameObject robotGameObject = GameObject.Instantiate(robotPrefab, spawnPos, Quaternion.identity);
+                    RobotScript robotScr = robotGameObject.GetComponent<RobotScript>();
+                    currentRobots.Add(robotScr);
                 }
             }
         }
