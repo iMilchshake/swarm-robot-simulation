@@ -274,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209230502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.12, y: 0, z: -15.28}
+  m_LocalPosition: {x: -14.82, y: 0, z: -15.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 667675764}
   - component: {fileID: 667675763}
   - component: {fileID: 667675762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 1081903471}
   - component: {fileID: 1081903470}
   - component: {fileID: 1081903469}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,11 +803,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdee86f8869ad94ab7b319100993e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 1
   fps: -1
-  communicateRange: 7
+  communicateRange: 8
+  communicateRangeSquared: 0
   visionRange: 4
+  visionRangeSquared: 0
   spawnObject: {fileID: 249695894}
   robotPrefab: {fileID: 2450203593373713367, guid: 0088105744d0bd2408481e1913af04fc, type: 3}
+  avgDirMult: 100
+  avgPosDirMult: 0.05
+  ownDirMult: 0.05
+  collisionMult: 80
 --- !u!4 &1258836745
 Transform:
   m_ObjectHideFlags: 0
@@ -834,7 +841,7 @@ GameObject:
   - component: {fileID: 1276022875}
   - component: {fileID: 1276022874}
   - component: {fileID: 1276022873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +936,7 @@ GameObject:
   - component: {fileID: 1636178317}
   - component: {fileID: 1636178316}
   - component: {fileID: 1636178315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3485068778056613093}
   - component: {fileID: 4777005941598135517}
   - component: {fileID: 4511439433957386086}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4836177953219340926}
   - component: {fileID: 6868814491074824358}
   - component: {fileID: 2494140706255632908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Icosphere.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 5850537287595131546}
   - component: {fileID: 2939752397172667396}
   - component: {fileID: 6758237079412943067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7296093322432748031}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: T-CHONKY
   m_TagString: Untagged
   m_Icon: {fileID: 0}

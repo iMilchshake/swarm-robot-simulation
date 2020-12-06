@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="51a4eee3-d97e-4e49-a033-afd7e0e46ee8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Robot.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Robot.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/T-CHONKY.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/T-CHONKY.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RobotScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RobotScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Prefab/Robot.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Scenes/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Scripts/ControllerScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Scripts/RobotScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Scripts/ControllerScript.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/Message.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourNet.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourTeam1.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourSoloStupid.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RobotScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourBoids.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1kCV51QalWaYs4q7qVLc03fDTi7" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys_rider" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="selectedOptions">
+        <set />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="51a4eee3-d97e-4e49-a033-afd7e0e46ee8" name="Default Changelist" comment="" />
+      <created>1605204375830</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605204375830</updated>
+      <workItem from="1605204376545" duration="690000" />
+      <workItem from="1605253928566" duration="2852000" />
+      <workItem from="1605481197222" duration="5517000" />
+      <workItem from="1606472479984" duration="12218000" />
+      <workItem from="1606558289914" duration="2080000" />
+      <workItem from="1607253482673" duration="8361000" />
+    </task>
+    <task id="LOCAL-00001" summary="robot changes color when finding the goal and code improvements">
+      <created>1606473450240</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606473450240</updated>
+    </task>
+    <task id="LOCAL-00002" summary="improved robot pathing">
+      <created>1606478167558</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606478167558</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added variable robot spawning">
+      <created>1606478191062</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606478191062</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added robot benchmarking">
+      <created>1606484235053</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606484235053</updated>
+    </task>
+    <task id="LOCAL-00005" summary="optimisations">
+      <created>1607255008474</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607255008474</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="robot changes color when finding the goal and code improvements" />
+    <MESSAGE value="improved robot pathing" />
+    <MESSAGE value="added variable robot spawning" />
+    <MESSAGE value="Added robot benchmarking" />
+    <MESSAGE value="optimisations" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimisations" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2647" y="309" key="RiderGenerateDialog" timestamp="1607255583017">
+      <screen x="1920" y="65" width="1920" height="1040" />
+    </state>
+    <state x="2647" y="309" key="RiderGenerateDialog/0.0.1920.1040/1920.65.1920.1040@1920.65.1920.1040" timestamp="1607255583017" />
+    <state x="461" y="164" key="SettingsEditor" timestamp="1606474051544">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1606474051544" />
+    <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog" timestamp="1606475108653">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1606475108653" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1607255016570">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1607255016570" />
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606473949587">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1606473949587" />
+    <state x="2536" y="305" key="run.anything.popup" timestamp="1607257174893">
+      <screen x="1920" y="65" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1606481469938" />
+    <state x="2536" y="305" key="run.anything.popup/0.0.1920.1040/1920.65.1920.1040@1920.65.1920.1040" timestamp="1607257174893" />
+  </component>
+</project>

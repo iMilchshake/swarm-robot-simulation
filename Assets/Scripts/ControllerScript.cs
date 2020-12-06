@@ -19,6 +19,10 @@ public class ControllerScript : MonoBehaviour
     public GameObject spawnObject;
     public GameObject robotPrefab;
     private List<RobotScript> currentRobots = new List<RobotScript>();
+    public float avgDirMult;
+    public float avgPosDirMult;
+    public float ownDirMult;
+    public float collisionMult;
     
     void Start()
     {
@@ -39,7 +43,7 @@ public class ControllerScript : MonoBehaviour
         rnd = new Random();
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(5, 500, 25, 1, 1.2f, 3));
+        StartCoroutine(BenchmarkRobot(5, 500, 5, 1, 1.2f, 3));
     }
     
     // TODO: Add variable RobotBehaviour

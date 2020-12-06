@@ -28,7 +28,7 @@ public class RobotScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //add behaviour to Robot
-        behaviour = new RobotBehaviourTeam1(this);
+        behaviour = new RobotBehaviourBoids(this);
 
         //add self to robot-list
         robots.Add(this);
@@ -59,16 +59,14 @@ public class RobotScript : MonoBehaviour
         //Apply Movement
         Vector3 dirVec = new Vector3(targetLocation.x - rb.position.x, 0, targetLocation.z - rb.position.z);
         if (Vector3.Distance(Vector3.zero, dirVec) > speed)
-        //if(ControllerScript.InRangeSquared(Vector3.zero, dirVec, speed * speed))
         {
             dirVec = dirVec.normalized * speed;
-            // rb.MovePosition(rb.position + dirVec);
-            transform.position += dirVec;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 15f);
+            //transform.position += dirVec;
+            rb.MovePosition(transform.position + dirVec);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 180f);
             moving = true;
         } else
         {
-            //rb.MovePosition(new Vector3(targetLocation.x, rb.position.y, targetLocation.z));
             transform.position = new Vector3(targetLocation.x, rb.position.y, targetLocation.z);
             moving = false;
         }
@@ -79,12 +77,10 @@ public class RobotScript : MonoBehaviour
 
         //test if goal was found
         if (!foundGoal && Vector3.Distance(goal.transform.position, transform.position) < ControllerScript.ctrlScript.visionRange)
-        //if (!foundGoal && ControllerScript.InRangeSquared(goal.transform.position, transform.position, ControllerScript.ctrlScript.visionRangeSquared))
         {
             GoalFound(goal.transform.position);
         } 
         
-        //Physics.Simulate(Time.fixedDeltaTime);
     }
 
     public void GoalFound(Vector3 pos)
@@ -131,7 +127,7 @@ public class RobotScript : MonoBehaviour
         tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.communicateRange, ControllerScript.ctrlScript.communicateRange, 32, new Color(0.5f, 0.2f, 0.2f, 0.5f));
         tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.visionRange, ControllerScript.ctrlScript.visionRange, 32, new Color(0.2f, 0.6f, 0.3f, 0.5f));
 
-        Debug.DrawLine(rb.position, new Vector3(targetLocation.x, rb.position.y, targetLocation.z), new Color(0.2f, 0.6f, 0.3f, 0.5f));
+        Debug.DrawLine(rb.position, new Vector3(targetLocation.x, rb.position.y, targetLocation.z), new Color(0.2f, 0.6f, 0.3f, 1f));
     }
 
     public void DestroyRobot()
