@@ -803,7 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdee86f8869ad94ab7b319100993e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fps: 9999999
+  fps: -1
   communicateRange: 7
   visionRange: 4
   spawnObject: {fileID: 249695894}

@@ -10,9 +10,12 @@ public class ControllerScript : MonoBehaviour
 {
     public static ControllerScript ctrlScript;
     public static Random rnd;
+    public bool debug;
     public int fps;
     public float communicateRange;
+    public float communicateRangeSquared;
     public float visionRange;
+    public float visionRangeSquared;
     public GameObject spawnObject;
     public GameObject robotPrefab;
     private List<RobotScript> currentRobots = new List<RobotScript>();
@@ -24,15 +27,19 @@ public class ControllerScript : MonoBehaviour
 
         //set target fps
         Application.targetFrameRate = fps;
+        
+        //disable autoSimulation/physics
+        Physics.autoSimulation = false;
 
-        //set timeScale
-        Time.fixedDeltaTime = 0.02f;
+        //calculate squared ranges
+        communicateRangeSquared = communicateRange * communicateRange;
+        visionRangeSquared = visionRange * visionRange;
         
         //initialize random generator
         rnd = new Random();
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(1, 46, 5, 1, 1.2f, 3));
+        StartCoroutine(BenchmarkRobot(5, 500, 25, 1, 1.2f, 3));
     }
     
     // TODO: Add variable RobotBehaviour
@@ -51,7 +58,7 @@ public class ControllerScript : MonoBehaviour
                 SpawnRobots(n, rowSize, gap);
 
                 // start timer
-                float t0 = Time.time;
+                int t0 = Time.frameCount;
 
                 // Wait for robots to finish
                 var allDone = false;
@@ -72,7 +79,7 @@ public class ControllerScript : MonoBehaviour
                 }
                 
                 // end timer
-                float t = Time.time - t0;
+                int t = Time.frameCount - t0;
 
                 // Clear Scene
                 while (currentRobots.Count > 0)
@@ -82,7 +89,7 @@ public class ControllerScript : MonoBehaviour
                     robo.DestroyRobot();
                 }
 
-                Debug.Log(n + " Robots finished in " + t + " sec");
+                Debug.Log(n + " Robots finished in " + t + " frames");
                 output += n + ";" + t + "\n";
             }
         }
@@ -138,6 +145,9 @@ public class ControllerScript : MonoBehaviour
         var x2 = (float) RandomDoubleNeg(0, max);
         return RandomBoolean() ? new Vector2(x1, x2) : new Vector2(x2, x1);
     }
-    
-    
+
+    public static bool InRangeSquared(Vector3 a, Vector3 b, float rangeSquared)
+    {
+        return (a - b).sqrMagnitude < rangeSquared;
+    }
 }

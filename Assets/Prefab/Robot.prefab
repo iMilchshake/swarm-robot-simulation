@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  speed: 0.1
+  speed: 0.25
   test: {fileID: 11500000, guid: b4f8bfee16375924f808b104f6aecc7b, type: 3}
   id: 0
   moving: 0

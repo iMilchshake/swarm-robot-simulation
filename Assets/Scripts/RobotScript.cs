@@ -7,7 +7,7 @@ public class RobotScript : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed;
-    public RobotBehaviour behaviour;
+    private RobotBehaviour behaviour;
     public MonoScript test;
     public int id;
     public bool moving;
@@ -39,16 +39,19 @@ public class RobotScript : MonoBehaviour
         //set spawn location as movement target-location
         SetTargetLocation(rb.position);
 
-        //find goal object in lvl
+        //find goal object in level
         goal = GameObject.Find("Goal");
         goalPosition = Vector3.negativeInfinity;
         foundGoal = false;
         
         //set default material
         mainBodyRenderer.material = defaultMaterial;
+        
+        //disable auto physics
+        Physics.autoSimulation = false;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //run behaviour's decision making
         behaviour.DoStep();
@@ -56,25 +59,32 @@ public class RobotScript : MonoBehaviour
         //Apply Movement
         Vector3 dirVec = new Vector3(targetLocation.x - rb.position.x, 0, targetLocation.z - rb.position.z);
         if (Vector3.Distance(Vector3.zero, dirVec) > speed)
+        //if(ControllerScript.InRangeSquared(Vector3.zero, dirVec, speed * speed))
         {
             dirVec = dirVec.normalized * speed;
-            rb.MovePosition(rb.position + dirVec);
+            // rb.MovePosition(rb.position + dirVec);
+            transform.position += dirVec;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 15f);
             moving = true;
         } else
         {
-            rb.MovePosition(new Vector3(targetLocation.x, rb.position.y, targetLocation.z));
+            //rb.MovePosition(new Vector3(targetLocation.x, rb.position.y, targetLocation.z));
+            transform.position = new Vector3(targetLocation.x, rb.position.y, targetLocation.z);
             moving = false;
         }
 
         //show debug
-        ShowDebug();
+        if (ControllerScript.ctrlScript.debug)
+            ShowDebug();
 
         //test if goal was found
         if (!foundGoal && Vector3.Distance(goal.transform.position, transform.position) < ControllerScript.ctrlScript.visionRange)
+        //if (!foundGoal && ControllerScript.InRangeSquared(goal.transform.position, transform.position, ControllerScript.ctrlScript.visionRangeSquared))
         {
             GoalFound(goal.transform.position);
         } 
+        
+        //Physics.Simulate(Time.fixedDeltaTime);
     }
 
     public void GoalFound(Vector3 pos)
@@ -96,11 +106,11 @@ public class RobotScript : MonoBehaviour
 
     public void Broadcast<T>(Message<T> m)
     {
-        foreach (RobotScript rs in findRobots())
+        foreach (RobotScript rs in FindRobots())
             Message(rs, m);
     }
 
-    public List<RobotScript> findRobots()
+    public List<RobotScript> FindRobots()
     {
         List<RobotScript> robotsInRange = new List<RobotScript>();
         foreach (RobotScript rs in robots)
@@ -115,7 +125,7 @@ public class RobotScript : MonoBehaviour
 
     private void ShowDebug()
     {
-        foreach (var rs in findRobots())
+        foreach (var rs in FindRobots())
             Debug.DrawLine(rb.position, rs.rb.position, new Color(0.5f, 0.2f, 0.2f, 0.5f));
 
         tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.communicateRange, ControllerScript.ctrlScript.communicateRange, 32, new Color(0.5f, 0.2f, 0.2f, 0.5f));
