@@ -94,8 +94,22 @@ public class RobotScript : MonoBehaviour
 
     private void LateUpdate()
     {
+        // apply motion if possible
         if (nextPosSet)
+        {
             transform.position = nextPos;
+        }
+        
+        // check if robot is out of bounds!
+        Vector3 oldpos = transform.position;
+        if (Math.Abs(transform.position.x) > 24)
+        {
+            transform.position = new Vector3(Math.Sign(transform.position.x) * 24, oldpos.y, oldpos.z);
+        }
+        else if (Math.Abs(transform.position.z) > 24)
+        {
+            transform.position = new Vector3(oldpos.x, oldpos.y, Math.Sign(transform.position.z) * 24);
+        }
     }
 
     public void GoalFound(Vector3 pos)
