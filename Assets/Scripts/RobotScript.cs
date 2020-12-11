@@ -72,7 +72,7 @@ public class RobotScript : MonoBehaviour
             nextPos = transform.position + dirVec;
             nextPosSet = true;
             //rb.MovePosition(transform.position + dirVec);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 25f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 45f);
             moving = true;
         } else
         {

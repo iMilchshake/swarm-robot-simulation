@@ -104,7 +104,7 @@
       <workItem from="1606558289914" duration="2080000" />
       <workItem from="1607253482673" duration="8744000" />
       <workItem from="1607684502366" duration="4557000" />
-      <workItem from="1607728441187" duration="757000" />
+      <workItem from="1607728441187" duration="1321000" />
     </task>
     <task id="LOCAL-00001" summary="robot changes color when finding the goal and code improvements">
       <created>1606473450240</created>
@@ -155,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607689019820</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added custom collisions with walls, boids no longer bug out of the level, but they get  stuck now..">
+      <created>1607729330898</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1607729330898</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +203,8 @@
     <MESSAGE value="optimisations" />
     <MESSAGE value="implemented boids" />
     <MESSAGE value="improved boids pathing, but now robots sometimes get lost. sad times :(" />
-    <option name="LAST_COMMIT_MESSAGE" value="improved boids pathing, but now robots sometimes get lost. sad times :(" />
+    <MESSAGE value="added custom collisions with walls, boids no longer bug out of the level, but they get  stuck now.." />
+    <option name="LAST_COMMIT_MESSAGE" value="added custom collisions with walls, boids no longer bug out of the level, but they get  stuck now.." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2647" y="309" key="RiderGenerateDialog" timestamp="1607255583017">
@@ -211,11 +219,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1606475108653" />
-    <state x="2472" y="317" key="Vcs.Push.Dialog.v2" timestamp="1607689044284">
+    <state x="2472" y="317" key="Vcs.Push.Dialog.v2" timestamp="1607729344686">
       <screen x="1920" y="65" width="1920" height="1040" />
     </state>
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1607255016570" />
-    <state x="2472" y="317" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@1920.65.1920.1040" timestamp="1607689044284" />
+    <state x="2472" y="317" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@1920.65.1920.1040" timestamp="1607729344686" />
     <state x="2697" y="498" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607688062294">
       <screen x="1920" y="65" width="1920" height="1040" />
     </state>
