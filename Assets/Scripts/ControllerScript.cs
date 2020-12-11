@@ -23,7 +23,7 @@ public class ControllerScript : MonoBehaviour
     public float avgPosDirMult;
     public float ownDirMult;
     public float collisionMult;
-    
+    public float randomnessMult;
     void Start()
     {
         //make this single instance of ControllerScript accessible to everyone
@@ -43,7 +43,7 @@ public class ControllerScript : MonoBehaviour
         rnd = new Random();
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(5, 500, 5, 1, 1.2f, 3));
+        StartCoroutine(BenchmarkRobot(5, 20, 1, 5, 1.2f, 3));
     }
     
     // TODO: Add variable RobotBehaviour
@@ -58,6 +58,8 @@ public class ControllerScript : MonoBehaviour
             // repeat simulation multiple times
             for (int i = 0; i < repeats; i++)
             {
+                Debug.Log(n);
+                
                 // Spawn n robots
                 SpawnRobots(n, rowSize, gap);
 
@@ -115,7 +117,7 @@ public class ControllerScript : MonoBehaviour
                 if(spawnedRobotCount++ < n)
                 {
                     Vector3 spawnPos = new Vector3(spawnPosition.x + (r * gap) - (rowLength/2), spawnPosition.y, spawnPosition.z - (i * gap));
-                    GameObject robotGameObject = GameObject.Instantiate(robotPrefab, spawnPos, Quaternion.identity);
+                    GameObject robotGameObject = GameObject.Instantiate(robotPrefab, spawnPos, Quaternion.Euler(0f, (float) ControllerScript.rnd.NextDouble() * 360f, 0f));
                     RobotScript robotScr = robotGameObject.GetComponent<RobotScript>();
                     currentRobots.Add(robotScr);
                 }
@@ -153,5 +155,10 @@ public class ControllerScript : MonoBehaviour
     public static bool InRangeSquared(Vector3 a, Vector3 b, float rangeSquared)
     {
         return (a - b).sqrMagnitude < rangeSquared;
+    }
+
+    public static bool RandomBooleanWithChange(double chance)
+    {
+        return rnd.NextDouble() < chance;
     }
 }

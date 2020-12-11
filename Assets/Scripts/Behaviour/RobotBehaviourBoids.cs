@@ -4,6 +4,7 @@ using System;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using Random = System.Random;
 using Vector3 = UnityEngine.Vector3;
 
 public class RobotBehaviourBoids : RobotBehaviour
@@ -66,8 +67,9 @@ public class RobotBehaviourBoids : RobotBehaviour
                 target += avgPosDir * ControllerScript.ctrlScript.avgPosDirMult;
                 target += collisionAvoidanceDir * ControllerScript.ctrlScript.collisionMult;
                 target += avgDir * ControllerScript.ctrlScript.avgDirMult;
+                target += new Vector3((float) ControllerScript.rnd.NextDouble(), 0, (float) ControllerScript.rnd.NextDouble())*ControllerScript.ctrlScript.randomnessMult;
             }
-            
+
             // Wall Collision
             const int layerMask = 1 << 8;
             if (Physics.Raycast(robot.transform.position, robot.transform.forward, 1f, layerMask))

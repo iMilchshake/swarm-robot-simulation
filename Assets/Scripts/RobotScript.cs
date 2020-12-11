@@ -18,9 +18,13 @@ public class RobotScript : MonoBehaviour
     public Material defaultMaterial;
     public Material foundGoalMaterial;
     public MeshRenderer mainBodyRenderer;
-
+    
+    public Vector3 nextPos;
+    public bool nextPosSet;
+    
     private static List<RobotScript> robots = new List<RobotScript>();
     public static int robot_count = 0;
+    
 
     void Start()
     {
@@ -44,11 +48,15 @@ public class RobotScript : MonoBehaviour
         goalPosition = Vector3.negativeInfinity;
         foundGoal = false;
         
+        //initialize nextPos
+        nextPos = Vector3.zero;
+        nextPosSet = false;
+        
         //set default material
         mainBodyRenderer.material = defaultMaterial;
         
         //disable auto physics
-        Physics.autoSimulation = false;
+        Physics.autoSimulation = true;
     }
 
     void Update()
@@ -61,9 +69,10 @@ public class RobotScript : MonoBehaviour
         if (Vector3.Distance(Vector3.zero, dirVec) > speed)
         {
             dirVec = dirVec.normalized * speed;
-            //transform.position += dirVec;
-            rb.MovePosition(transform.position + dirVec);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 180f);
+            nextPos = transform.position + dirVec;
+            nextPosSet = true;
+            //rb.MovePosition(transform.position + dirVec);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dirVec), 25f);
             moving = true;
         } else
         {
@@ -81,6 +90,12 @@ public class RobotScript : MonoBehaviour
             GoalFound(goal.transform.position);
         } 
         
+    }
+
+    private void LateUpdate()
+    {
+        if (nextPosSet)
+            transform.position = nextPos;
     }
 
     public void GoalFound(Vector3 pos)
