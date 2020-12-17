@@ -26,9 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51a4eee3-d97e-4e49-a033-afd7e0e46ee8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RoboticsTesting/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RoboticsTesting/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RoboticsTesting/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RoboticsTesting/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/RobotScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RobotScript.cs" afterDir="false" />
     </list>
@@ -42,6 +40,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourBoidsAdvanced.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Scripts/ControllerScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://H:/Programmieren/Unity/RoboticsTesting/Assets/Scripts/RobotScript.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -52,9 +52,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourSoloStupid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourNet.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourBoids.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Behaviour/RobotBehaviourBoidsAdvanced.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RobotScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ControllerScript.cs" />
       </list>
     </option>
   </component>
@@ -113,7 +113,7 @@
       <workItem from="1607684502366" duration="4557000" />
       <workItem from="1607728441187" duration="1400000" />
       <workItem from="1607729939249" duration="870000" />
-      <workItem from="1608220807406" duration="3349000" />
+      <workItem from="1608220807406" duration="6507000" />
     </task>
     <task id="LOCAL-00001" summary="robot changes color when finding the goal and code improvements">
       <created>1606473450240</created>
@@ -178,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607729832709</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Added improved version of Boids">
+      <created>1608224225520</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608224225520</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +228,8 @@
     <MESSAGE value="improved boids pathing, but now robots sometimes get lost. sad times :(" />
     <MESSAGE value="added custom collisions with walls, boids no longer bug out of the level, but they get  stuck now.." />
     <MESSAGE value="boids dont get stuck anymore™ but teams sometimes split up" />
-    <option name="LAST_COMMIT_MESSAGE" value="boids dont get stuck anymore™ but teams sometimes split up" />
+    <MESSAGE value="Added improved version of Boids" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added improved version of Boids" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2647" y="309" key="RiderGenerateDialog" timestamp="1607255583017">
@@ -236,11 +244,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1606475108653" />
-    <state x="2472" y="317" key="Vcs.Push.Dialog.v2" timestamp="1607729958033">
+    <state x="2472" y="317" key="Vcs.Push.Dialog.v2" timestamp="1608224388167">
       <screen x="1920" y="65" width="1920" height="1040" />
     </state>
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@0.0.1920.1040" timestamp="1607255016570" />
-    <state x="2472" y="317" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@1920.65.1920.1040" timestamp="1607729958033" />
+    <state x="2472" y="317" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.65.1920.1040@1920.65.1920.1040" timestamp="1608224388167" />
     <state x="2697" y="498" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607688062294">
       <screen x="1920" y="65" width="1920" height="1040" />
     </state>

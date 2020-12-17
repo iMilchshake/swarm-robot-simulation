@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.Profiling;
 using UnityEngine;
 using Random = System.Random;
 
@@ -24,6 +25,8 @@ public class ControllerScript : MonoBehaviour
     public float ownDirMult;
     public float collisionMult;
     public float randomnessMult;
+    public GameObject goal;
+    
     void Start()
     {
         //make this single instance of ControllerScript accessible to everyone
@@ -43,67 +46,77 @@ public class ControllerScript : MonoBehaviour
         rnd = new Random();
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(5, 20, 1, 5, 1.2f, 3));
+        StartCoroutine(BenchmarkRobot(5, 20, 1, 10, 1.2f, 3, 10));
     }
     
     // TODO: Add variable RobotBehaviour
-    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize)
+    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount)
     {
         // initialize output-string
         String output = "";
         
-        // run simulation for each n in [nMin; nMax; step]
-        for (int n = nMin; n <= nMax; n += step)
+        // run simulation for different goal-positions
+        for (int p = 0; p < pCount; p++)
         {
-            // repeat simulation multiple times
-            for (int i = 0; i < repeats; i++)
+            // set random goal position
+            float new_x = (float) RandomDouble(-23, 23);
+            float new_z = (float) RandomDouble(-23, 10);
+            goal.transform.position = new Vector3(new_x, goal.transform.position.y, new_z);
+            Debug.Log("Goal Position " + p + "/" + pCount);
+            
+            // run simulation for each n in [nMin; nMax; step]
+            for (int n = nMin; n <= nMax; n += step)
             {
-                Debug.Log(n);
-                
-                // Spawn n robots
-                SpawnRobots(n, rowSize, gap);
-
-                // start timer
-                int t0 = Time.frameCount;
-
-                // Wait for robots to finish
-                var allDone = false;
-                while (!allDone)
+                // repeat simulation multiple times
+                for (int i = 0; i < repeats; i++)
                 {
-                    allDone = true;
-                    foreach (var robo in currentRobots)
+                    Debug.Log(n);
+
+                    // Spawn n robots
+                    SpawnRobots(n, rowSize, gap, "boids2");
+
+                    // start timer
+                    int t0 = Time.frameCount;
+
+                    // Wait for robots to finish
+                    var allDone = false;
+                    while (!allDone)
                     {
-                        if (!robo.foundGoal)
+                        allDone = true;
+                        foreach (var robo in currentRobots)
                         {
-                            allDone = false;
-                            break;
+                            if (!robo.foundGoal)
+                            {
+                                allDone = false;
+                                break;
+                            }
                         }
+
+                        //wait for next frame
+                        yield return null;
                     }
-                    
-                    //wait for next frame
-                    yield return null; 
-                }
-                
-                // end timer
-                int t = Time.frameCount - t0;
 
-                // Clear Scene
-                while (currentRobots.Count > 0)
-                {
-                    RobotScript robo = currentRobots[0];
-                    currentRobots.RemoveAt(0);
-                    robo.DestroyRobot();
-                }
+                    // end timer
+                    int t = Time.frameCount - t0;
 
-                Debug.Log(n + " Robots finished in " + t + " frames");
-                output += n + ";" + t + "\n";
+                    // Clear Scene
+                    while (currentRobots.Count > 0)
+                    {
+                        RobotScript robo = currentRobots[0];
+                        currentRobots.RemoveAt(0);
+                        robo.DestroyRobot();
+                    }
+
+                    Debug.Log(n + " Robots finished in " + t + " frames");
+                    output += n + ";" + t + "\n";
+                }
             }
         }
 
         Debug.Log(output);
     }
     
-    void SpawnRobots(int n, int rowSize, float gap)
+    void SpawnRobots(int n, int rowSize, float gap, string behaviour)
     {
         var rows = Mathf.CeilToInt((float) n / (float)rowSize);
         var rowLength = (rows-1) * gap;
@@ -119,11 +132,14 @@ public class ControllerScript : MonoBehaviour
                     Vector3 spawnPos = new Vector3(spawnPosition.x + (r * gap) - (rowLength/2), spawnPosition.y, spawnPosition.z - (i * gap));
                     GameObject robotGameObject = GameObject.Instantiate(robotPrefab, spawnPos, Quaternion.Euler(0f, (float) ControllerScript.rnd.NextDouble() * 360f, 0f));
                     RobotScript robotScr = robotGameObject.GetComponent<RobotScript>();
+                    robotScr.SetBehaviour(behaviour);
                     currentRobots.Add(robotScr);
                 }
             }
         }
     }
+
+
 
     public static bool RandomBoolean()
     {

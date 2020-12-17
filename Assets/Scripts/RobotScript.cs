@@ -32,7 +32,7 @@ public class RobotScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //add behaviour to Robot
-        behaviour = new RobotBehaviourBoidsAdvanced(this);
+        //behaviour = new RobotBehaviourBoidsAdvanced(this);
 
         //add self to robot-list
         robots.Add(this);
@@ -163,5 +163,24 @@ public class RobotScript : MonoBehaviour
     {
         robots.Remove(this);
         Destroy(this.gameObject);
+    }
+
+    public void SetBehaviour(string b)
+    {
+        switch (b)
+        {
+            case "boids1":
+                behaviour = new RobotBehaviourBoids(this);
+                break;
+            case "boids2":
+                behaviour = new RobotBehaviourBoidsAdvanced(this);
+                break;
+            case "net":
+                behaviour = new RobotBehaviourNet(this);
+                break;
+            default:
+                Debug.LogError("Invalid Behaviour name");
+                break;
+        }
     }
 }
