@@ -10,6 +10,7 @@
           <e p="Behaviour" t="Include">
             <e p="RobotBehaviour.cs" t="Include" />
             <e p="RobotBehaviourBoids.cs" t="Include" />
+            <e p="RobotBehaviourBoidsAdvanced.cs" t="Include" />
             <e p="RobotBehaviourNet.cs" t="Include" />
             <e p="RobotBehaviourSoloStupid.cs" t="Include" />
             <e p="RobotBehaviourTeam1.cs" t="Include" />

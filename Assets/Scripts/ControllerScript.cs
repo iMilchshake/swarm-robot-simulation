@@ -123,7 +123,6 @@ public class ControllerScript : MonoBehaviour
                 }
             }
         }
-
     }
 
     public static bool RandomBoolean()

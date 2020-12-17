@@ -32,7 +32,7 @@ public class RobotScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         //add behaviour to Robot
-        behaviour = new RobotBehaviourBoids(this);
+        behaviour = new RobotBehaviourBoidsAdvanced(this);
 
         //add self to robot-list
         robots.Add(this);
