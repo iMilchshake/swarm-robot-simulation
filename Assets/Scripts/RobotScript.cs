@@ -176,7 +176,7 @@ public class RobotScript : MonoBehaviour
                 behaviour = new RobotBehaviourBoidsAdvanced(this);
                 break;
             case "net":
-                behaviour = new RobotBehaviourNet(this);
+                behaviour = new RobotBehaviourNetAdvanced(this);
                 break;
             default:
                 Debug.LogError("Invalid Behaviour name");

@@ -2,9 +2,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using Unity.Profiling;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class ControllerScript : MonoBehaviour
@@ -46,14 +49,14 @@ public class ControllerScript : MonoBehaviour
         rnd = new Random();
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(5, 20, 1, 10, 1.2f, 3, 10));
+        StartCoroutine(BenchmarkRobot(4, 20, 1, 5, 1.2f, 3, 5, "net"));
     }
     
     // TODO: Add variable RobotBehaviour
-    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount)
+    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount, string behaviour)
     {
         // initialize output-string
-        String output = "";
+        String output = "n;frames\n";
         
         // run simulation for different goal-positions
         for (int p = 0; p < pCount; p++)
@@ -62,7 +65,8 @@ public class ControllerScript : MonoBehaviour
             float new_x = (float) RandomDouble(-23, 23);
             float new_z = (float) RandomDouble(-23, 10);
             goal.transform.position = new Vector3(new_x, goal.transform.position.y, new_z);
-            Debug.Log("Goal Position " + p + "/" + pCount);
+            
+                Debug.Log("Goal Position " + (p+1) + "/" + pCount);
             
             // run simulation for each n in [nMin; nMax; step]
             for (int n = nMin; n <= nMax; n += step)
@@ -70,10 +74,8 @@ public class ControllerScript : MonoBehaviour
                 // repeat simulation multiple times
                 for (int i = 0; i < repeats; i++)
                 {
-                    Debug.Log(n);
-
                     // Spawn n robots
-                    SpawnRobots(n, rowSize, gap, "boids2");
+                    SpawnRobots(n, rowSize, gap, behaviour);
 
                     // start timer
                     int t0 = Time.frameCount;
@@ -107,13 +109,32 @@ public class ControllerScript : MonoBehaviour
                         robo.DestroyRobot();
                     }
 
-                    Debug.Log(n + " Robots finished in " + t + " frames");
+                    //Debug.Log(n + " Robots finished in " + t + " frames");
                     output += n + ";" + t + "\n";
                 }
             }
         }
 
+        var settings = communicateRange + ";" + visionRange + ";" + avgDirMult + ";" + avgPosDirMult + ";" +
+                       ownDirMult + ";" + collisionMult + ";" + randomnessMult + "\n";
+        
         Debug.Log(output);
+        
+        var id = Guid.NewGuid().ToString("N").Substring(0, 5);
+        var dataPath = Application.dataPath + "/csv/" + behaviour + "_" + id + ".csv";
+        var configPath = Application.dataPath + "/csv/_configs.txt";
+        
+        // save data
+        var writer = new StreamWriter(dataPath);
+        writer.WriteLine(output);
+        writer.Flush();
+        writer.Close();
+        
+        // save config
+        var writer2 = File.AppendText(configPath);//new StreamWriter(configPath);
+        writer2.WriteLine(id + " -> " + settings);
+        writer2.Flush();
+        writer2.Close();
     }
     
     void SpawnRobots(int n, int rowSize, float gap, string behaviour)
@@ -176,4 +197,5 @@ public class ControllerScript : MonoBehaviour
     {
         return rnd.NextDouble() < chance;
     }
+
 }
