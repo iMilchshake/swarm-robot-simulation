@@ -178,6 +178,12 @@ public class RobotScript : MonoBehaviour
             case "net":
                 behaviour = new RobotBehaviourNetAdvanced(this);
                 break;
+            case "solo_coop":
+                behaviour = new RobotBehaviourSoloCooperation(this);
+                break;
+            case "min_cheating":
+                behaviour = new RobotBehaviourSoloCheating(this);
+                break;
             default:
                 Debug.LogError("Invalid Behaviour name");
                 break;

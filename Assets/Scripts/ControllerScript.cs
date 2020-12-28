@@ -49,7 +49,7 @@ public class ControllerScript : MonoBehaviour
         rnd = new Random();
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(4, 20, 1, 5, 1.2f, 3, 5, "net"));
+        StartCoroutine(BenchmarkRobot(1, 1, 1, 1, 1.2f, 3, 100, "min_cheating"));
     }
     
     // TODO: Add variable RobotBehaviour
@@ -62,8 +62,8 @@ public class ControllerScript : MonoBehaviour
         for (int p = 0; p < pCount; p++)
         {
             // set random goal position
-            float new_x = (float) RandomDouble(-23, 23);
-            float new_z = (float) RandomDouble(-23, 10);
+            float new_x = (float) RandomDouble(-21, 21);
+            float new_z = (float) RandomDouble(-21, 10);
             goal.transform.position = new Vector3(new_x, goal.transform.position.y, new_z);
             
                 Debug.Log("Goal Position " + (p+1) + "/" + pCount);

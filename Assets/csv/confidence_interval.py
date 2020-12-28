@@ -38,14 +38,16 @@ def readCSV(path: str):
 def plot(files: list, colors: list, show_error=False):
     # get stats
     stats = list(map(readCSV, files))  # calculate stats for each file
-    print(stats)
 
     # plot
     fig, ax = plt.subplots()
     for i in range(len(stats)):
+        print(files[i] + ": \n" + str(stats[i]))
         ax.plot(stats[i]['n'], stats[i]['mean'], label=files[i], c=colors[i])
         if show_error:
             ax.errorbar(stats[i]['n'], stats[i]['mean'], yerr=(stats[i]['ci95_hi'] - stats[i]['ci95_lo']) / 2, ecolor='black', fmt='o', elinewidth=1, capsize=5)
+
+    ax.axhline(y=100, color='gray', label='min possible frames', linestyle='dotted')
 
     ax.set(xlabel='cluster size', ylabel='simulation steps',
            title='amount of sim. steps it took a robot cluster to find the goal')
@@ -55,8 +57,9 @@ def plot(files: list, colors: list, show_error=False):
 
 
 if __name__ == "__main__":
-    f = ['boids2_c7918.csv', 'net_8ada3.csv']  # files to plot
-    c = ['red', 'blue', 'green']
+    f = ['boids2_c7918.csv', 'net_8ada3.csv', 'solo_coop_f465c.csv']  # files to plot
+    c = ['red', 'blue', 'green', "blue"]
     plot(f, c)  # plot
-    plot([f[0]], [c[0]], show_error=True)
-    plot([f[1]], [c[1]], show_error=True)
+    #plot([f[0]], [c[0]], show_error=True)
+    plot(['min_cheating_94670.csv'], ['blue'], show_error=True)
+
