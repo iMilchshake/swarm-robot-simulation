@@ -48,15 +48,26 @@ public class ControllerScript : MonoBehaviour
         //initialize random generator
         rnd = new Random();
         
+        //define behaviours
+        string[] behaviours = {"net", "boids2", "solo_coop", "min_cheating"};
+        
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(1, 1, 1, 1, 1.2f, 3, 100, "min_cheating"));
+        StartCoroutine(BenchmarkRobot(2, 40, 2, 4, 1.2f, 3, 5, behaviours));
     }
     
     // TODO: Add variable RobotBehaviour
-    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount, string behaviour)
+    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount, string[] behaviours)
     {
-        // initialize output-string
-        String output = "n;frames\n";
+        // Debug
+        Debug.Log("Starting simulation..");
+        Debug.Log("" + (((nMax - nMin)/step)*repeats*pCount*behaviours.Length) + " expected repeats" );
+        
+        // initialize array with output-strings
+        string[] output = new string[behaviours.Length];
+        for(int i = 0; i < behaviours.Length; i++)
+        {
+            output[i] = "n;frames\n";
+        }
         
         // run simulation for different goal-positions
         for (int p = 0; p < pCount; p++)
@@ -65,52 +76,62 @@ public class ControllerScript : MonoBehaviour
             float new_x = (float) RandomDouble(-21, 21);
             float new_z = (float) RandomDouble(-21, 10);
             goal.transform.position = new Vector3(new_x, goal.transform.position.y, new_z);
-            
-                Debug.Log("Goal Position " + (p+1) + "/" + pCount);
-            
-            // run simulation for each n in [nMin; nMax; step]
-            for (int n = nMin; n <= nMax; n += step)
+
+            // run simulation for each behaviour
+            for (var b = 0; b < behaviours.Length; b++)
             {
-                // repeat simulation multiple times
-                for (int i = 0; i < repeats; i++)
+                Debug.Log("Goal Position: " + (p + 1) + "/" + pCount + " | " + "Behaviour: " + behaviours[b] + " ("+ (b + 1) + "/" + behaviours.Length + ")");
+                // run simulation for each n in [nMin; nMax; step]
+                for (int n = nMin; n <= nMax; n += step)
                 {
-                    // Spawn n robots
-                    SpawnRobots(n, rowSize, gap, behaviour);
-
-                    // start timer
-                    int t0 = Time.frameCount;
-
-                    // Wait for robots to finish
-                    var allDone = false;
-                    while (!allDone)
+                    // only spawn one
+                    if (behaviours[b].Equals("min_cheating"))
+                        n = 1;
+                    
+                    // repeat simulation multiple times
+                    for (int i = 0; i < repeats; i++)
                     {
-                        allDone = true;
-                        foreach (var robo in currentRobots)
+                        // Spawn n robots
+                        SpawnRobots(n, rowSize, gap, behaviours[b]);
+
+                        // start timer
+                        int t0 = Time.frameCount;
+
+                        // Wait for robots to finish
+                        var allDone = false;
+                        while (!allDone)
                         {
-                            if (!robo.foundGoal)
+                            allDone = true;
+                            foreach (var robo in currentRobots)
                             {
-                                allDone = false;
-                                break;
+                                if (!robo.foundGoal)
+                                {
+                                    allDone = false;
+                                    break;
+                                }
                             }
+
+                            //wait for next frame
+                            yield return null;
                         }
 
-                        //wait for next frame
-                        yield return null;
+                        // end timer
+                        int t = Time.frameCount - t0;
+
+                        // Clear Scene
+                        while (currentRobots.Count > 0)
+                        {
+                            RobotScript robo = currentRobots[0];
+                            currentRobots.RemoveAt(0);
+                            robo.DestroyRobot();
+                        }
+                        
+                        output[b] += n + ";" + t + "\n";
                     }
-
-                    // end timer
-                    int t = Time.frameCount - t0;
-
-                    // Clear Scene
-                    while (currentRobots.Count > 0)
-                    {
-                        RobotScript robo = currentRobots[0];
-                        currentRobots.RemoveAt(0);
-                        robo.DestroyRobot();
-                    }
-
-                    //Debug.Log(n + " Robots finished in " + t + " frames");
-                    output += n + ";" + t + "\n";
+                
+                    // skip other n sizes
+                    if (behaviours[b].Equals("min_cheating"))
+                        n = nMax;
                 }
             }
         }
@@ -118,17 +139,21 @@ public class ControllerScript : MonoBehaviour
         var settings = communicateRange + ";" + visionRange + ";" + avgDirMult + ";" + avgPosDirMult + ";" +
                        ownDirMult + ";" + collisionMult + ";" + randomnessMult + "\n";
         
-        Debug.Log(output);
+
+        Array.ForEach(output, Debug.Log);
         
         var id = Guid.NewGuid().ToString("N").Substring(0, 5);
-        var dataPath = Application.dataPath + "/csv/" + behaviour + "_" + id + ".csv";
         var configPath = Application.dataPath + "/csv/_configs.txt";
         
-        // save data
-        var writer = new StreamWriter(dataPath);
-        writer.WriteLine(output);
-        writer.Flush();
-        writer.Close();
+        // save data for each behaviour
+        for (var b = 0; b < behaviours.Length; b++)
+        {
+            var dataPath = Application.dataPath + "/csv/" + behaviours[b] + "_" + id + ".csv";
+            var writer = new StreamWriter(dataPath);
+            writer.WriteLine(output[b]);
+            writer.Flush();
+            writer.Close();
+        }
         
         // save config
         var writer2 = File.AppendText(configPath);//new StreamWriter(configPath);

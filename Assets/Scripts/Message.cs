@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Message<T>
 {
-    private T data;
+    private readonly T data;
     private int _tag;
     
     public Message(T data, int tag)
