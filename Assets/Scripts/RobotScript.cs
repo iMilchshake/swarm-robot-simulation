@@ -8,7 +8,6 @@ public class RobotScript : MonoBehaviour
     public Rigidbody rb;
     public float speed;
     private RobotBehaviour behaviour;
-    public MonoScript test;
     public int id;
     public bool moving;
     private GameObject goal;
@@ -24,8 +23,8 @@ public class RobotScript : MonoBehaviour
     
     private static List<RobotScript> robots = new List<RobotScript>();
     public static int robot_count = 0;
-    
 
+    public Material lineRendererMaterial;
     void Start()
     {
         //find rb component
@@ -153,10 +152,10 @@ public class RobotScript : MonoBehaviour
         foreach (var rs in FindRobots())
             Debug.DrawLine(rb.position, rs.rb.position, new Color(0.5f, 0.2f, 0.2f, 0.5f));
 
-        tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.communicateRange, ControllerScript.ctrlScript.communicateRange, 32, new Color(0.5f, 0.2f, 0.2f, 0.5f));
-        tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.visionRange, ControllerScript.ctrlScript.visionRange, 32, new Color(0.2f, 0.6f, 0.3f, 0.5f));
+        tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.communicateRange, ControllerScript.ctrlScript.communicateRange, 32, new Color(0.5f, 0.2f, 0.2f, 1f));
+        tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.visionRange, ControllerScript.ctrlScript.visionRange, 32, new Color(0.2f, 0.4f, 1f, 1f));
 
-        Debug.DrawLine(rb.position, new Vector3(targetLocation.x, rb.position.y, targetLocation.z), new Color(0.2f, 0.6f, 0.3f, 1f));
+        Debug.DrawLine(rb.position, new Vector3(targetLocation.x, transform.position.y, targetLocation.z), new Color(0.2f, 0.4f, 1f, 1f));
     }
 
     public void DestroyRobot()

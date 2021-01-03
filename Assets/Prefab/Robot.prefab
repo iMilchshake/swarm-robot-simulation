@@ -50,15 +50,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   speed: 0.25
-  test: {fileID: 11500000, guid: b4f8bfee16375924f808b104f6aecc7b, type: 3}
   id: 0
   moving: 0
   goalPosition: {x: 0, y: 0, z: 0}
   foundGoal: 0
   targetLocation: {x: 0, y: 0, z: 0}
-  defaultMaterial: {fileID: 2100000, guid: bf5cb57a0626b034885b9a4c7ad6cbc0, type: 2}
-  foundGoalMaterial: {fileID: 2100000, guid: ad4a4798cfee3444aa3b1ba5da653de1, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 69c096149e2ee6545a7ad59ad2325050, type: 2}
+  foundGoalMaterial: {fileID: 2100000, guid: c6e35361e36219242924a86b4007e3c1, type: 2}
   mainBodyRenderer: {fileID: 7405301067326008136}
+  nextPos: {x: 0, y: 0, z: 0}
+  nextPosSet: 0
+  lineRendererMaterial: {fileID: 2100000, guid: 1523a9a933749214fb77ff9817dde6ee, type: 2}
 --- !u!33 &2450203593373713360
 MeshFilter:
   m_ObjectHideFlags: 0

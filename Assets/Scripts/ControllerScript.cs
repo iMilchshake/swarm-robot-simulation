@@ -52,10 +52,9 @@ public class ControllerScript : MonoBehaviour
         string[] behaviours = {"net", "boids2", "solo_coop", "min_cheating"};
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(2, 40, 2, 4, 1.2f, 3, 5, behaviours));
+        StartCoroutine(BenchmarkRobot(7, 40, 2, 2, 1.2f, 3, 15, behaviours));
     }
     
-    // TODO: Add variable RobotBehaviour
     private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount, string[] behaviours)
     {
         // Debug
