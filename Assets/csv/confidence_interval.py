@@ -11,19 +11,16 @@ def readCSV(path: str):
     # read csv file
     df = pd.read_csv(path, sep=';')
 
-    # group data by cluster size
-    df_grouped = df.groupby(['n'])
-
     # get grouped stats
-    grouped_stats = df.groupby(['n'])['frames'].agg(['mean', 'count', 'std'])
-
+    grouped_stats = df.groupby(['n'])['frames'].describe(percentiles=[0.1, 0.9])
+    print(grouped_stats)
     # calculate confidence interval
     ci95_hi = []
     ci95_lo = []
     for i in grouped_stats.index:
-        m, c, s = grouped_stats.loc[i]
-        ci95_hi.append(m + 1.96 * s / math.sqrt(c))
-        ci95_lo.append(m - 1.96 * s / math.sqrt(c))
+        c, m, std, min_value, low_10, median, top_10, max_value = grouped_stats.loc[i]
+        ci95_hi.append(m + 1.96 * std / math.sqrt(c))
+        ci95_lo.append(m - 1.96 * std / math.sqrt(c))
 
     grouped_stats['ci95_hi'] = ci95_hi
     grouped_stats['ci95_lo'] = ci95_lo
@@ -35,31 +32,39 @@ def readCSV(path: str):
     return grouped_stats
 
 
-def plot(files: list, colors: list, show_error=False):
+def plot(files: list, colors: list, names: list, tit: str, t='mean', show_error=False, show_tmin=None):
     # get stats
     stats = list(map(readCSV, files))  # calculate stats for each file
 
     # plot
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(dpi=200)
     for i in range(len(stats)):
         print(files[i] + ": \n" + str(stats[i]))
-        ax.plot(stats[i]['n'], stats[i]['mean'], label=files[i], c=colors[i])
+        ax.plot(stats[i]['n'], stats[i][t], label=names[i], c=colors[i])
         if show_error:
             ax.errorbar(stats[i]['n'], stats[i]['mean'], yerr=(stats[i]['ci95_hi'] - stats[i]['ci95_lo']) / 2, ecolor='black', fmt='o', elinewidth=1, capsize=5)
 
-    ax.axhline(y=100, color='gray', label='min possible frames', linestyle='dotted')
+    if show_tmin:
+        ax.axhline(y=show_tmin, color='gray', label='$T_{min}$', linestyle='dotted')
+        plt.yticks(list(range(0, 2250, 250)) + [show_tmin])
 
-    ax.set(xlabel='cluster size', ylabel='simulation steps',
-           title='amount of sim. steps it took a robot cluster to find the goal')
+    plt.xticks(list(range(2, 42, 2)))
+    plt.xlim(2, 40)
+
+
+    plt.yticks()
+    ax.set(xlabel='Schwarmgröße', ylabel='Zeit (in Simulationsschritten)',
+           title=tit)
     ax.grid()
     ax.legend()
     plt.show()
 
-
 if __name__ == "__main__":
-    f = ['boids2_c7918.csv', 'net_8ada3.csv', 'solo_coop_f465c.csv']  # files to plot
+    f = ['boids2_19596.csv', 'net_19596.csv', 'solo_coop_19596.csv']  # files to plot
     c = ['red', 'blue', 'green', "blue"]
-    plot(f, c)  # plot
+    n = ['Boids', 'Netz', 'SoloCoop']
+    plot(f, c, n, 'Durschnitt Anzahl Simulationsschritte bis zum finden des Zielobjektes', t='mean', show_tmin=98.546667)  # plot
+    plot(f, c, n, 'Top 10% Anzahl Simulationsschritte bis zum finden des Zielobjektes', t='10%')  # plot
     #plot([f[0]], [c[0]], show_error=True)
-    plot(['min_cheating_94670.csv'], ['blue'], show_error=True)
+    plot(['min_cheating_19596.csv'], ['blue'], ['min_cheat'], "bla", show_error=True)
 
