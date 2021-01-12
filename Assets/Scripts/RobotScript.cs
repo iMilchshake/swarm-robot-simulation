@@ -107,7 +107,7 @@ public class RobotScript : MonoBehaviour
         {
             transform.position = new Vector3(oldpos.x, oldpos.y, Math.Sign(transform.position.z) * 24);
         }
-        
+
         //show debug
         if (ControllerScript.ctrlScript.debug)
             ShowDebug();
@@ -161,14 +161,17 @@ public class RobotScript : MonoBehaviour
 
         Debug.DrawLine(rb.position, new Vector3(targetLocation.x, transform.position.y, targetLocation.z), new Color(0.2f, 0.4f, 1f, 1f));
     */
-        if (!foundGoal)
-        {
-            TobiDraw.tobiDraw.DrawLine(
-                transform.position,
-                new Vector3(targetLocation.x, transform.position.y, targetLocation.z),
-                new Color(0.2f, 0.4f, 1f, 1f),
-                1f);
-        }
+        foreach (var rs in FindRobots())
+            TobiDraw.tobiDraw.DrawLine(rb.position, rs.rb.position, Color.magenta, 0.1f);
+        
+        TobiDraw.tobiDraw.DrawLine(
+            rb.position,
+            new Vector3(targetLocation.x, transform.position.y, targetLocation.z),
+            Color.green,
+            0.1f);
+
+        TobiDraw.tobiDraw.DrawCircle(rb.position, ControllerScript.ctrlScript.communicateRange, 0.05f, 64, Color.magenta);
+        TobiDraw.tobiDraw.DrawCircle(rb.position, ControllerScript.ctrlScript.visionRange, 0.05f, 64, Color.green);
     }
 
     public void DestroyRobot()
