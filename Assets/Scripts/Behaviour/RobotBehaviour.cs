@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class RobotBehaviour
-
 {
     public RobotScript robot;
 

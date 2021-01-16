@@ -49,13 +49,13 @@ public class ControllerScript : MonoBehaviour
         rnd = new Random();
         
         //define behaviours
-        string[] behaviours = {"net", "boids2", "solo_coop", "min_cheating"};
+        BehaviourType[] behaviours = {BehaviourType.SoloCoop};
         
         // Start Coroutine for Robots Benchmarking
-        StartCoroutine(BenchmarkRobot(7, 40, 2, 2, 1.2f, 3, 15, behaviours));
+        StartCoroutine(BenchmarkRobot(5, 40, 2, 4, 1.2f, 3, 15, behaviours));
     }
     
-    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount, string[] behaviours)
+    private IEnumerator BenchmarkRobot(int nMin, int nMax, int step, int repeats, float gap, int rowSize, int pCount, BehaviourType[] behaviours)
     {
         // Debug
         Debug.Log("Starting simulation..");
@@ -161,7 +161,7 @@ public class ControllerScript : MonoBehaviour
         writer2.Close();
     }
     
-    void SpawnRobots(int n, int rowSize, float gap, string behaviour)
+    void SpawnRobots(int n, int rowSize, float gap, BehaviourType behaviour)
     {
         var rows = Mathf.CeilToInt((float) n / (float)rowSize);
         var rowLength = (rows-1) * gap;
@@ -220,6 +220,21 @@ public class ControllerScript : MonoBehaviour
     public static bool RandomBooleanWithChange(double chance)
     {
         return rnd.NextDouble() < chance;
+    }
+    
+    // Note that Color32 and Color implictly convert to each other. You may pass a Color object to this method without first casting it.
+    public static string ColorToHex(Color32 color)
+    {
+        var hex = color.r.ToString("X2") + color.g.ToString("X2") + color.b.ToString("X2");
+        return hex;
+    }
+ 
+    public static Color HexToColor(string hex)
+    {
+        var r = byte.Parse(hex.Substring(0,2), System.Globalization.NumberStyles.HexNumber);
+        var g = byte.Parse(hex.Substring(2,2), System.Globalization.NumberStyles.HexNumber);
+        var b = byte.Parse(hex.Substring(4,2), System.Globalization.NumberStyles.HexNumber);
+        return new Color32(r,g,b, 255);
     }
 
 }

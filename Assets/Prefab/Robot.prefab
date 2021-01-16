@@ -58,6 +58,10 @@ MonoBehaviour:
   defaultMaterial: {fileID: 2100000, guid: 69c096149e2ee6545a7ad59ad2325050, type: 2}
   foundGoalMaterial: {fileID: 2100000, guid: c6e35361e36219242924a86b4007e3c1, type: 2}
   mainBodyRenderer: {fileID: 7405301067326008136}
+  innerRingColor: {r: 0.8, g: 0, b: 0.18039216, a: 1}
+  outerRingColor: {r: 0.023529412, g: 0.5058824, b: 0.69411767, a: 1}
+  communicationLineColor: {r: 0.023529412, g: 0.5058824, b: 0.69411767, a: 1}
+  movementLineColor: {r: 0.30980393, g: 0.57254905, b: 0.34901962, a: 1}
   nextPos: {x: 0, y: 0, z: 0}
   nextPosSet: 0
   lineRendererMaterial: {fileID: 2100000, guid: 1523a9a933749214fb77ff9817dde6ee, type: 2}

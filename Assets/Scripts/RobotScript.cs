@@ -17,6 +17,10 @@ public class RobotScript : MonoBehaviour
     public Material defaultMaterial;
     public Material foundGoalMaterial;
     public MeshRenderer mainBodyRenderer;
+    public Color innerRingColor;
+    public Color outerRingColor;
+    public Color communicationLineColor;
+    public Color movementLineColor;
 
     public Vector3 nextPos;
     public bool nextPosSet;
@@ -153,25 +157,17 @@ public class RobotScript : MonoBehaviour
 
     private void ShowDebug()
     {
-        /*foreach (var rs in FindRobots())
-            Debug.DrawLine(rb.position, rs.rb.position, new Color(0.5f, 0.2f, 0.2f, 0.5f));
-
-        tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.communicateRange, ControllerScript.ctrlScript.communicateRange, 32, new Color(0.5f, 0.2f, 0.2f, 1f));
-        tDebug.DrawEllipse(rb.position, Vector3.up, Vector3.forward, ControllerScript.ctrlScript.visionRange, ControllerScript.ctrlScript.visionRange, 32, new Color(0.2f, 0.4f, 1f, 1f));
-
-        Debug.DrawLine(rb.position, new Vector3(targetLocation.x, transform.position.y, targetLocation.z), new Color(0.2f, 0.4f, 1f, 1f));
-    */
         foreach (var rs in FindRobots())
-            TobiDraw.tobiDraw.DrawLine(rb.position, rs.rb.position, Color.magenta, 0.1f);
+            TobiDraw.tobiDraw.DrawLine(rb.position, rs.rb.position, communicationLineColor, 0.15f);
         
         TobiDraw.tobiDraw.DrawLine(
             rb.position,
             new Vector3(targetLocation.x, transform.position.y, targetLocation.z),
-            Color.green,
+            movementLineColor,
             0.1f);
 
-        TobiDraw.tobiDraw.DrawCircle(rb.position, ControllerScript.ctrlScript.communicateRange, 0.05f, 64, Color.magenta);
-        TobiDraw.tobiDraw.DrawCircle(rb.position, ControllerScript.ctrlScript.visionRange, 0.05f, 64, Color.green);
+        TobiDraw.tobiDraw.DrawCircle(rb.position, ControllerScript.ctrlScript.communicateRange, 0.05f, 64, outerRingColor);
+        TobiDraw.tobiDraw.DrawCircle(rb.position, ControllerScript.ctrlScript.visionRange, 0.05f, 64, innerRingColor);
     }
 
     public void DestroyRobot()
@@ -180,23 +176,23 @@ public class RobotScript : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void SetBehaviour(string b)
+    public void SetBehaviour(BehaviourType b)
     {
         switch (b)
         {
-            case "boids1":
+            case BehaviourType.Boids1:
                 behaviour = new RobotBehaviourBoids(this);
                 break;
-            case "boids2":
+            case BehaviourType.Boids2:
                 behaviour = new RobotBehaviourBoidsAdvanced(this);
                 break;
-            case "net":
+            case BehaviourType.Net:
                 behaviour = new RobotBehaviourNetAdvanced(this);
                 break;
-            case "solo_coop":
+            case BehaviourType.SoloCoop:
                 behaviour = new RobotBehaviourSoloCooperation(this);
                 break;
-            case "min_cheating":
+            case BehaviourType.MinCheating:
                 behaviour = new RobotBehaviourSoloCheating(this);
                 break;
             default:
@@ -204,4 +200,13 @@ public class RobotScript : MonoBehaviour
                 break;
         }
     }
+}
+
+public enum BehaviourType
+{
+    Boids1 = 0,
+    Boids2 = 1,
+    Net = 2,
+    SoloCoop = 3,
+    MinCheating = 4
 }
